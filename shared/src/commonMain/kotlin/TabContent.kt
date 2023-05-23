@@ -30,15 +30,15 @@ fun Tab.TabContent() {
     )
 
     Navigator(screen = BasicNavigationScreen(index = 0)) { navigator ->
-        //as of now commenting this out, this is causing java.lang.NoSuchMethodError: No static method AnimatedContent issue
-        //SlideTransition(navigator) { screen ->
+        //we can comment SlideTransition out for running on android , this is causing java.lang.NoSuchMethodError: No static method AnimatedContent issue
+        SlideTransition(navigator) { screen ->
             Column {
                 InnerTabNavigation()
-                //screen.Content()
-                navigator.lastItem.Content()
+                screen.Content() //this one too need to comment out for running on android
+                //navigator.lastItem.Content() //this one too need to be uncommented for running on android
                 println("Navigator Last Event: ${navigator.lastEvent}")
             }
-        //}
+        }
     }
 }
 
