@@ -23,7 +23,7 @@ fun Tab.TabContent() {
     LifecycleEffect(
         onStarted = {
             //Log.d("Navigator", "Start tab $tabTitle")
-                    },
+            },
         onDisposed = {
             //Log.d("Navigator", "Dispose tab $tabTitle")
             },

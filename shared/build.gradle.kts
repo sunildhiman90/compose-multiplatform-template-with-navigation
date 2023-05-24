@@ -22,6 +22,7 @@ kotlin {
                 implementation(compose.foundation)
                 implementation(compose.material)
                 implementation(compose.material3)
+                implementation(compose.animation)
                 implementation(compose.materialIconsExtended)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
@@ -42,7 +43,7 @@ kotlin {
                 // TabNavigator
                 implementation("cafe.adriel.voyager:voyager-tab-navigator:$voyagerVersion")
 
-                // Transitions
+                // Transitions, if you want to use voyager transitions, make sure you are using compose animation in commonMain
                 implementation("cafe.adriel.voyager:voyager-transitions:$voyagerVersion")
             }
         }
