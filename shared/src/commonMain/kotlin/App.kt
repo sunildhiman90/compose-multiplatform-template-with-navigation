@@ -21,11 +21,11 @@ import cafe.adriel.voyager.navigator.tab.TabNavigator
 @Composable
 fun App() {
     TabNavigator(
-        HomeTab,
+        HomeTab(),
         tabDisposable = {
             TabDisposable(
                 navigator = it,
-                tabs = listOf(HomeTab, FavoritesTab, ProfileTab)
+                tabs = listOf(HomeTab(), FavoritesTab(), ProfileTab())
             )
         }
     ) {
@@ -45,9 +45,9 @@ fun App() {
 fun BottomBar(
 ) {
     BottomNavigation {
-        TabNavigationItem(HomeTab)
-        TabNavigationItem(FavoritesTab)
-        TabNavigationItem(ProfileTab)
+        TabNavigationItem(HomeTab())
+        TabNavigationItem(FavoritesTab())
+        TabNavigationItem(ProfileTab())
     }
 }
 
