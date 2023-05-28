@@ -3,10 +3,11 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 
-internal class ProfileTab : Tab {
+internal class ProfileTab() : Tab {
 
     override val options: TabOptions
         @Composable
@@ -24,6 +25,8 @@ internal class ProfileTab : Tab {
 
     @Composable
     override fun Content() {
-        TabContent()
+        //Navigator(PostListScreen())
+        Navigator(BasicNavigationScreen(0))
+        //TabContent(nestedNavigation = true)
     }
 }

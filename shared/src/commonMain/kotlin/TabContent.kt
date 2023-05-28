@@ -10,7 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.lifecycle.LifecycleEffect
+import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.transitions.SlideTransition
@@ -19,7 +21,7 @@ import cafe.adriel.voyager.transitions.SlideTransition
 //TODO, instead of using Navigator in TabContent, try to use it outside all tabs and tab content, so that new route will show up without tabs
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun Tab.TabContent() {
+fun Tab.TabContent(nestedNavigation: Boolean = true) {
     val tabTitle = options.title
 
     LifecycleEffect(
@@ -31,21 +33,23 @@ fun Tab.TabContent() {
             },
     )
 
+    val mainNavigator = LocalNavigator.currentOrThrow
+
     Navigator(screen = BasicNavigationScreen(index = 0)) { navigator ->
-        //we can comment SlideTransition out for running on android , this is causing java.lang.NoSuchMethodError: No static method AnimatedContent issue
-        SlideTransition(navigator) { screen ->
+        val navigatorToUse = if(nestedNavigation) navigator else mainNavigator
+        SlideTransition(navigatorToUse) { screen ->
             Column {
                 InnerTabNavigation()
                 screen.Content() //this one too need to comment out for running on android
                 //navigator.lastItem.Content() //this one too need to be uncommented for running on android
-                println("Navigator Last Event: ${navigator.lastEvent}")
+                println("Navigator Last Event: ${navigatorToUse.lastEvent}")
             }
         }
     }
 }
 
 @Composable
-private fun InnerTabNavigation() {
+fun InnerTabNavigation() {
     Row(
         modifier = Modifier.padding(16.dp)
     ) {

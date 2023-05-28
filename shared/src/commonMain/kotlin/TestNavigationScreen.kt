@@ -20,14 +20,15 @@ import cafe.adriel.voyager.core.lifecycle.LifecycleEffect
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
-data class BasicNavigationScreen(
+internal data class TestNavigationScreen(
+    val navigator: Navigator,
     val index: Int,
-    val wrapContent: Boolean = false,
-    val nestedNavigation: Boolean = true,
+    val wrapContent: Boolean = false
 ) : Screen {
 
     override val key = uniqueScreenKey
@@ -36,14 +37,11 @@ data class BasicNavigationScreen(
     @Composable
     override fun Content() {
         LifecycleEffect(
-            onStarted = { println("Navigator Start screen #$index") },
-            onDisposed = { println("Navigator Dispose screen #$index") },
+            onStarted = { println("Test Navigator Start screen #$index") },
+            onDisposed = { println(" Test Navigator Dispose screen #$index") },
         )
 
-        //this will provide main Navigator if we have not used BasicNavigationScreen inside Navigator for example for HomeTab
-        // And this will provide this screen's parent navigator if we have used BasicNavigationScreen inside Navigator for example for ProfileTab or FavouritesTab
-        //In short [LocalNavigator.currentOrThrow] provides current screen's nearest parent navigator
-        val navigator = LocalNavigator.currentOrThrow
+       // val navigator = LocalNavigator.currentOrThrow
 
         Column(
             verticalArrangement = Arrangement.Center,
@@ -53,31 +51,10 @@ data class BasicNavigationScreen(
                 else fillMaxSize()
             }
         ) {
-
-            Text(
-                text = if (nestedNavigation) "With Nested Navigation" else "Without Nested Navigation",
-                style = MaterialTheme.typography.headlineMedium
-            )
-            Spacer(modifier = Modifier.height(24.dp))
-
-            InnerTabNavigation()
-            Spacer(modifier = Modifier.height(56.dp))
-
-            Spacer(modifier = Modifier.height(24.dp))
-
             Text(
                 text = "Image Resource from commonMain",
                 style = MaterialTheme.typography.bodySmall
             )
-            Image(painter = painterResource("add_post_icon.png"), contentDescription = null, modifier = Modifier.size(50.dp))
-            Spacer(modifier = Modifier.height(24.dp))
-
-            Text(
-                text = "Screen #$index",
-                style = MaterialTheme.typography.bodySmall
-            )
-
-            Spacer(modifier = Modifier.height(24.dp))
 
             Row(
                 modifier = Modifier.padding(16.dp)
@@ -93,7 +70,7 @@ data class BasicNavigationScreen(
                 Spacer(modifier = Modifier.weight(.1f))
 
                 Button(
-                    onClick = { navigator.push(BasicNavigationScreen(index.inc(), wrapContent)) },
+                    onClick = { navigator.push(TestNavigationScreen(navigator,index.inc(), wrapContent)) },
                     modifier = Modifier.weight(.5f)
                 ) {
                     Text(text = "Push")
@@ -101,12 +78,12 @@ data class BasicNavigationScreen(
 
                 Spacer(modifier = Modifier.weight(.1f))
 
-//                Button(
-//                    onClick = { navigator.replace(TestNavigationScreen(navigator,index.inc(), wrapContent)) },
-//                    modifier = Modifier.weight(.5f)
-//                ) {
-//                    Text(text = "Replace")
-//                }
+                Button(
+                    onClick = { navigator.replace(TestNavigationScreen(navigator,index.inc(), wrapContent)) },
+                    modifier = Modifier.weight(.5f)
+                ) {
+                    Text(text = "Replace")
+                }
             }
 
             LazyColumn(
