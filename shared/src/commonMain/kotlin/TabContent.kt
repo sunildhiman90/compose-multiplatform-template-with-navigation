@@ -47,15 +47,15 @@ private fun InnerTabNavigation() {
     Row(
         modifier = Modifier.padding(16.dp)
     ) {
-        TabNavigationButton(HomeTab)
+        TabNavigationButton(HomeTab())
 
         Spacer(modifier = Modifier.weight(.05f))
 
-        TabNavigationButton(FavoritesTab)
+        TabNavigationButton(FavoritesTab())
 
         Spacer(modifier = Modifier.weight(.05f))
 
-        TabNavigationButton(ProfileTab)
+        TabNavigationButton(ProfileTab())
     }
 }
 

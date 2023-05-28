@@ -6,7 +6,7 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 
-object HomeTab : Tab {
+internal class HomeTab : Tab {
 
     override val options: TabOptions
         @Composable
