@@ -15,6 +15,8 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.transitions.SlideTransition
 
+
+//TODO, instead of using Navigator in TabContent, try to use it outside all tabs and tab content, so that new route will show up without tabs
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun Tab.TabContent() {
