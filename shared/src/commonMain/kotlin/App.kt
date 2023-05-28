@@ -20,6 +20,8 @@ import cafe.adriel.voyager.navigator.tab.TabNavigator
 )
 @Composable
 fun App() {
+
+    //TODO, try to use navigator here instead of TabContent
     TabNavigator(
         HomeTab(),
         tabDisposable = {
