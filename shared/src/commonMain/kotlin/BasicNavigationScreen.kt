@@ -1,3 +1,4 @@
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,6 +20,8 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 
 data class BasicNavigationScreen(
     val index: Int,
@@ -27,6 +30,7 @@ data class BasicNavigationScreen(
 
     override val key = uniqueScreenKey
 
+    @OptIn(ExperimentalResourceApi::class)
     @Composable
     override fun Content() {
         LifecycleEffect(
@@ -44,6 +48,11 @@ data class BasicNavigationScreen(
                 else fillMaxSize()
             }
         ) {
+            Text(
+                text = "Image Resource from commonMain",
+                style = MaterialTheme.typography.bodySmall
+            )
+            Image(painter = painterResource("add_post_icon.png"), contentDescription = null)
             Text(
                 text = "Screen #$index",
                 style = MaterialTheme.typography.bodySmall

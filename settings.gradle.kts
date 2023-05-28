@@ -2,7 +2,7 @@ rootProject.name = "compose-multiplatform-template-with-navigation"
 
 include(":androidApp")
 include(":shared")
-include(":iosEntryPoint")
+//include(":iosEntryPoint")
 include(":desktopApp")
 
 pluginManagement {

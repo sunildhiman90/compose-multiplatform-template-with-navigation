@@ -1,5 +1,6 @@
 plugins {
     kotlin("multiplatform")
+    kotlin("native.cocoapods")
     id("com.android.library")
     id("org.jetbrains.compose")
 }
@@ -13,7 +14,21 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    //due to public symbol IR issue, we are now using cocoapods from separate iosEntryPoint module and using that module in iosApp instead of shared and that module will be using shared module internally
+    //due to public symbol IR issue, we tried using cocoapods from separate iosEntryPoint module and using that module in iosApp instead of shared and that module will be using shared module internally
+    //but in that approach, we are facing issue: MissingResourceException for ios build:org.jetbrains.compose.resources.MissingResourceException: Missing resource with path: add_post_icon.png
+    // so as of now reverting back to using either custom voyager tab navigator using @HiddenFromObjC or trying internal class for Tab
+    cocoapods {
+        version = "1.0.0"
+        summary = "Some description for the Shared Module"
+        homepage = "Link to the Shared Module homepage"
+        ios.deploymentTarget = "14.1"
+        podfile = project.file("../iosApp/Podfile")
+        framework {
+            baseName = "shared"
+            isStatic = true
+        }
+        extraSpecAttributes["resources"] = "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
+    }
 
     sourceSets {
         val commonMain by getting {

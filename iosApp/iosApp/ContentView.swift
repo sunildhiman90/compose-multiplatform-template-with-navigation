@@ -1,10 +1,10 @@
 import UIKit
 import SwiftUI
-import iosEntryPoint
+import shared
 
 struct ComposeView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
-        Main_iosKt.AppController()
+        Main_iosKt.MainViewController()
     }
 
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
