@@ -21,6 +21,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.myapplication.common.MainRes
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
@@ -54,6 +55,7 @@ data class BasicNavigationScreen(
             }
         ) {
 
+            val app_name = MainRes.string.app_name
             Text(
                 text = if (nestedNavigation) "With Nested Navigation" else "Without Nested Navigation",
                 style = MaterialTheme.typography.headlineMedium
@@ -69,7 +71,11 @@ data class BasicNavigationScreen(
                 text = "Image Resource from commonMain",
                 style = MaterialTheme.typography.bodySmall
             )
-            Image(painter = painterResource("add_post_icon.png"), contentDescription = null, modifier = Modifier.size(50.dp))
+            Image(
+                painter = painterResource("add_post_icon.png"),
+                contentDescription = null,
+                modifier = Modifier.size(50.dp)
+            )
             Spacer(modifier = Modifier.height(24.dp))
 
             Text(

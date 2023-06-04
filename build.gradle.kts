@@ -6,3 +6,9 @@ plugins {
     id("com.android.library").apply(false)
     id("org.jetbrains.compose").apply(false)
 }
+
+buildscript {
+    dependencies {
+        classpath("io.github.skeptick.libres:gradle-plugin:1.1.8")
+    }
+}
