@@ -4,16 +4,9 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.compose")
 
-    //for resource generation
-    id("io.github.skeptick.libres")
+
 }
 
-libres {
-    generatedClassName = "MainRes" // "Res" by default
-    generateNamedArguments = true // false by default
-    baseLocaleLanguageCode = "en" // "en" by default
-    camelCaseNamesForAppleFramework = true // false by default
-}
 
 kotlin {
     android()
