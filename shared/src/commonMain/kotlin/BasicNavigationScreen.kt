@@ -21,7 +21,6 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.myapplication.common.MainRes
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
@@ -36,6 +35,7 @@ data class BasicNavigationScreen(
     @OptIn(ExperimentalResourceApi::class)
     @Composable
     override fun Content() {
+
         LifecycleEffect(
             onStarted = { println("Navigator Start screen #$index") },
             onDisposed = { println("Navigator Dispose screen #$index") },
@@ -55,7 +55,6 @@ data class BasicNavigationScreen(
             }
         ) {
 
-            val app_name = MainRes.string.app_name
             Text(
                 text = if (nestedNavigation) "With Nested Navigation" else "Without Nested Navigation",
                 style = MaterialTheme.typography.headlineMedium
@@ -72,7 +71,7 @@ data class BasicNavigationScreen(
                 style = MaterialTheme.typography.bodySmall
             )
             Image(
-                painter = painterResource("add_post_icon.png"),
+                painter = painterResource("MR/images/add_post_icon@1x.png"),
                 contentDescription = null,
                 modifier = Modifier.size(50.dp)
             )

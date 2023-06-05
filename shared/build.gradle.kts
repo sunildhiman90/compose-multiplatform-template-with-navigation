@@ -4,9 +4,18 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.compose")
 
+    //for moko resources
+    id("dev.icerock.mobile.multiplatform-resources")
 
 }
 
+multiplatformResources {
+    multiplatformResourcesPackage = "com.myapplication.common" // required
+    //multiplatformResourcesClassName = "SharedRes" // optional, default MR
+    //multiplatformResourcesVisibility = dev.icerock.gradle.MRVisibility.Internal // optional, default Public
+    //iosBaseLocalizationRegion = "en" // optional, default "en"
+    //multiplatformResourcesSourceSet = "commonMain"  // optional, default "commonMain"
+}
 
 kotlin {
     android()
@@ -64,6 +73,12 @@ kotlin {
 
                 // Transitions, if you want to use voyager transitions, make sure you are using compose animation in commonMain
                 implementation("cafe.adriel.voyager:voyager-transitions:$voyagerVersion")
+
+
+                //for moko resources
+                api("dev.icerock.moko:resources:0.22.3")
+                api("dev.icerock.moko:resources-compose:0.22.3") // for compose multiplatform
+                //testimplementation("dev.icerock.moko:resources-test:0.22.3")
             }
         }
         val androidMain by getting {
