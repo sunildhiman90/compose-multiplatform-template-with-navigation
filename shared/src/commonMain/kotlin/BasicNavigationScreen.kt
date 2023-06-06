@@ -36,6 +36,7 @@ data class BasicNavigationScreen(
     @Composable
     override fun Content() {
 
+
         LifecycleEffect(
             onStarted = { println("Navigator Start screen #$index") },
             onDisposed = { println("Navigator Dispose screen #$index") },
